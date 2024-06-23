@@ -1,6 +1,9 @@
 function App() {
   return (
+    <>
     <h1>Chai aur React | Aditya Pandey</h1>
+    </>
+    
   );
 }
 
