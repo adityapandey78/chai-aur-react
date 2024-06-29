@@ -1,7 +1,15 @@
 import React from 'react'
 
-export function Card() {
+function Card({username="Default Username",btnTxt="Default Value"}) {
+  console.log(username);
+  // console.log("props",props);
+ //console.log(props.username);
+  //ye props set hain iske kaaran 
+  //=> react inhe by default props hi bolta hai
+  //prop mene udhr app.jsx me define kr rkha hai
+  //function Card(props) sike jegeh destructuring kr skt6e hain and directr username likh skte hain
   return (
+    
     <div className="relative h-[400px] w-[300px] rounded-md">
       <img
         src="https://images.unsplash.com/photo-1546961329-78bef0414d7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHVzZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
@@ -10,14 +18,16 @@ export function Card() {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
       <div className="absolute bottom-4 left-4 text-left">
-        <h1 className="text-lg font-semibold text-white">Delba</h1>
+        <h1 className="text-lg font-semibold text-white">{username}</h1>
         <p className="mt-2 text-sm text-gray-300">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, debitis?
         </p>
         <button className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white">
-          View Profile &rarr;
+          {btnTxt} &rarr;
         </button>
       </div>
     </div>
   )
 }
+
+export default Card
