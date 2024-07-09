@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import "../Todo/Todo.css"
-import { FaCheckCircle } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
+import TodoForm from "./TodoForm";
+import { TodoList } from "./TodoList";
+import DataAndTime from "./DataAndTime";
 
 export const Todo=()=>{
 
-    const [inputVal,setInputVal]=useState()
+    const [inputVal,setInputVal]=useState("")
     const [task,setTask]=useState([]); //ye sare tasks vegera store krne ke liye , isliye iska usestate mene array rakha hai
-    const [dateTime,setDateTime]=useState()
+    
+    
 
-    const handleInputeChange=(value)=>{
-        setInputVal(value); //uska input value set kiya mene
-    };
-
-    const handleFormSubmit=(event)=>{
-        event.preventDefault();
+    const handleFormSubmit=(inputVal)=>{ //=>5th getting from the parent 
+        //ab hme isme event pass on ni krna pdega
         if (!inputVal) return;
-
         if(task.includes(inputVal)) {
             setInputVal("");
             alert("Already exits bro! Type smthng diff");
@@ -29,17 +26,7 @@ export const Todo=()=>{
         setInputVal(""); //kaam ho jaane ke baad blank ho jaaye
     };
 
-    //date and time
-    //useeffect use kra taaki memory leak na ho
-    useEffect(()=>{
-        const interval=setInterval(() => {
-            let now= new Date();
-            let formattedDate= now.toLocaleDateString();
-            let formattedTime= now.toLocaleTimeString();
-            setDateTime(`${formattedDate}-${formattedTime}`)
-        }, 1000);
-        return()=> clearInterval(interval); //ye interval clear kr dega and meomory leak ni hoga iske wejeh se
-    },[])
+    
 
     const handleDeleteBtn=(e)=>{
         console.log(e);//ye jis task pe click rk rhe hain wo out kr rha hai 
@@ -49,9 +36,7 @@ export const Todo=()=>{
         setTask(updatedTask)
 
     }
-    const handleCheckBtn=()=>{
-
-    }
+    
     const handleClearAll=()=>{
         setTask([])
     }
@@ -59,44 +44,25 @@ export const Todo=()=>{
         <section className="todo-container">
             <header>
                 <h1>Todo List</h1>
-                <h2 className="date-time" >{dateTime} </h2>
+                <DataAndTime/>    
             </header>
-            <section className="form">
-                <form onSubmit={handleFormSubmit}>
-                    <div>
-                        <input type="text" className="todo-input" autoComplete="off"
-                        value={inputVal}
-                        onChange={(event)=>handleInputeChange(event.target.value)} />
-                    </div>
-                    <div>
-                        <button type="submit" className="todo-btn">
-                            Add Task
-                        </button>
-                    </div>
-                </form>
-            </section>
+
+            <TodoForm onAddTodo={handleFormSubmit} />
+            {/*1st me (parent) passing on addtodo as prop to child  */}
+
             <section className="myUnOrdList">
             <ul>
                 {
                     task.map((currTask,index)=>{
-                        return <li className="todo-item" key={index}>
-                            <span>{currTask}</span> 
-                            {/* //har list ka current task definekr rkha hai */}
-                            <button> 
-                                <FaCheckCircle className="check-btn"
-                                onClick={handleCheckBtn} 
-                                />
-                            </button>    
-                            <button>
-                                <MdDeleteForever className="delete-btn"
-                                onClick={()=>handleDeleteBtn(currTask)}
-                                />
-                            </button>
-                        </li>
+                        return <TodoList key={index} 
+                        data={currTask}
+                        onHandleDeleteTodo={handleDeleteBtn}
+                        />; 
                     })
                 }
             </ul>
             </section>
+            
             <section className="clear-btn"
             onClick={handleClearAll}
             >
