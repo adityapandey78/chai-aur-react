@@ -19,7 +19,7 @@ function TodoForm({onAddTodo}) { // =>2nd(getting the prop) on add to ko as a pr
     return (
     <section className="form">
                 <form onSubmit={handleFormSubmit /*  =>3rd triggering this function*/}>
-                    <div>
+                    <div id='todo-div'>
                         <input type="text" className="todo-input"  autoComplete="off"
                         value={inputVal.content}
                         onChange={(event)=>handleInputeChange(event.target.value)} />
