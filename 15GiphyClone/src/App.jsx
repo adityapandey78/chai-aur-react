@@ -7,6 +7,7 @@ import GifPage from './Pages/GifPage'
 import Favourites from './Pages/Favourites'
 import Home from './Pages/Home'
 import AppLayout from './layout/AppLayout'
+import GifProvider from './Context/Gif-context'
 
 
   //homepage
@@ -45,8 +46,9 @@ import AppLayout from './layout/AppLayout'
     ])
 
 function App() {
-
+  <GifProvider>
   return <RouterProvider router={router}/>
+  </GifProvider>
 }
 
 export default App

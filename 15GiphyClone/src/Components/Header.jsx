@@ -1,11 +1,23 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Link } from 'react-router-dom';
 import {HiEllipsisVertical, HiMiniBars3BottomRight} from "react-icons/hi2"
+import GifProvider, { GifState } from '../Context/Gif-context';
 
 
 const Header = () => {
     const [category, setCategory] = useState([]);
     const [showCategory, setShowCategory] = useState(false);
+
+    const {gif,filter,setFilter,favourites}=GifState();
+
+    const fetchGifCategories =async()=>{
+      const {data}=await gif.category();
+      setCategory(data);
+    };
+
+    useEffect(()=>{
+      fetchGifCategories();
+    },[]);
 
   return (
     <nav>
@@ -18,10 +30,21 @@ const Header = () => {
             </Link>
             
             <div className='font-bold text-md flex gap-2 items-center'>
-            <Link className='px-4 py-1 hover:gradient border-b-4 hidden lg:block'>Reactions</Link>
+              {/* Render Categories */}
+              {category?.slice(0,5).map((cat)=>{
+                return(
+                  <Link 
+                  key={cat.name}
+                  to={`/${cat.name.encoded}`}
+                  className='px-4 py-1 hover:gradient border-b-4 hidden lg:block'>
+                  {cat.name}</Link>
+                )
+              })}
+
+
             <button onClick={()=>setShowCategory(!showCategory)}>
                 < HiEllipsisVertical 
-                size={30} 
+                size={35} 
                 className={`py-0.5 hover:gradient ${
                   showCategory? "gradient":""
                   } border-b-4 hidden lg:block`}
