@@ -35,6 +35,7 @@ function App() {
   }
 
  //? Now cheching with local storage
+ 
  useEffect(() => {
   try {
     const todos = JSON.parse(localStorage.getItem("todos"));
