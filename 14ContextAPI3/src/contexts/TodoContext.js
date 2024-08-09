@@ -13,7 +13,7 @@ export const TodoContext= createContext({
     updateTodo:(id,todo)=>{},
     deleteTodo:(id)=>{},
     toggleComplete:(id)=>{},
-    //upar humne context me kya kya methpds hain and kyakya values hain unhe decide kiya hai 
+    //upar humne context me kya kya methods hain and kyakya values hain unhe decide kiya hai 
 })
 
 
