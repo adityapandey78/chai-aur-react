@@ -11,4 +11,4 @@ Reducer is more like ki use store me register krna pdega taaki pta rhe store ko
   
 3. `Dispatch()` it handles the value isme Id and functionalities hoti hain jo reducers ki help se hoti hain   
 4. `useSelector()` A hook to access the redux store's state. This hook takes a selector function as an argument. The selector is called with the store state.   
--This hook takes an optional equality comparison function as the second parameter that allows you to customize the way the selected state is compared to determine whether the component needs to be re-rendered
+-This hook takes an optional equality comparison function as the second parameter that allows you to customize the way the selected state is compared to determine whether the component needs to be re-rendered0
